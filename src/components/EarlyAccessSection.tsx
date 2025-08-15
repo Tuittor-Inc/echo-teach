@@ -60,7 +60,7 @@ const EarlyAccessSection = () => {
 
               <div className="flex items-center justify-center gap-2 text-sm text-gray-400">
                 <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
-                <span>1,247 people already joined</span>
+                <span>0 people already joined</span>
               </div>
             </div>
           </div>
