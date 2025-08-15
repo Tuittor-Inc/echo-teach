@@ -3,24 +3,30 @@ import { Input } from "@/components/ui/input";
 import { Chrome } from "lucide-react";
 import heroBackground from "@/assets/hero2-bg.jpg";
 import { useState } from "react";
-import { googleAuth, GoogleUser } from "@/lib/google-auth";
+import { googleAuth } from "@/lib/google-auth";
 import { toast } from "sonner";
+import { useAppDispatch, useAppSelector } from "@/redux/hooks";
+import { setUser, setLoading } from "@/redux/slices/userSlice";
+import UserProfile from "./UserProfile";
+import { Link } from "react-router-dom";
 
 const HeroSection = () => {
-  const [isLoading, setIsLoading] = useState(false);
+  const dispatch = useAppDispatch();
+  const { isAuthenticated, isLoading } = useAppSelector((state) => state.user);
 
   const handleGoogleSignIn = async () => {
-    setIsLoading(true);
+    dispatch(setLoading(true));
     try {
       const user = await googleAuth.signIn();
-      toast.success(`Welcome, ${user.name}!`);
+      dispatch(setUser(user));
+      toast.success(`Welcome, ${user.firstName || user.name.split(' ')[0]}!`);
       console.log('Signed in user:', user);
-      // Here you can handle the signed-in user (e.g., save to state, redirect, etc.)
-    } catch (error) {
+    } catch (error: any) {
       console.error('Google sign-in error:', error);
-      toast.error('Failed to sign in with Google. Please try again.');
+      const errorMessage = error?.message || 'Failed to sign in with Google. Please try again.';
+      toast.error(errorMessage);
     } finally {
-      setIsLoading(false);
+      dispatch(setLoading(false));
     }
   };
 
@@ -37,6 +43,9 @@ const HeroSection = () => {
       <div className="absolute top-8 left-8 z-20">
         <h2 className="text-2xl font-bold gradient-text">Tuittor</h2>
       </div>
+      
+      {/* User Profile - Top Right */}
+      <UserProfile />
       {/* Animated gradient overlay */}
       <div className="absolute inset-0 bg-gradient-hero opacity-30 animate-gradient animate-gradient-shift"></div>
       
@@ -59,33 +68,58 @@ const HeroSection = () => {
             Experience real-time teaching that feels human — powered by AI.
           </p>
 
-          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center max-w-md mx-auto mb-8">
-            <Button 
-              variant="google" 
-              size="lg" 
-              className="w-full sm:w-auto flex items-center gap-3"
-              onClick={handleGoogleSignIn}
-              disabled={isLoading}
-            >
-              <Chrome className="w-5 h-5" />
-              {isLoading ? 'Signing in...' : 'Sign Up with Google'}
-            </Button>
-          </div>
+          {!isAuthenticated && (
+            <>
+              <div className="flex flex-col sm:flex-row gap-4 justify-center items-center max-w-md mx-auto mb-8">
+                <Button 
+                  variant="google" 
+                  size="lg" 
+                  className="w-full sm:w-auto flex items-center gap-3"
+                  onClick={handleGoogleSignIn}
+                  disabled={isLoading}
+                >
+                  <Chrome className="w-5 h-5" />
+                  {isLoading ? 'Signing in...' : 'Sign Up with Google'}
+                </Button>
+              </div>
 
-          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center max-w-md mx-auto">
-            <Input 
-              type="email" 
-              placeholder="Enter your email" 
-              className="bg-background/10 backdrop-blur-sm border-border text-white placeholder:text-gray-400"
-            />
-            <Button variant="hero" size="lg" className="w-full sm:w-auto">
-              Get Early Access
-            </Button>
-          </div>
+              <div className="flex flex-col sm:flex-row gap-4 justify-center items-center max-w-md mx-auto">
+                <Input 
+                  type="email" 
+                  placeholder="Enter your email" 
+                  className="bg-background/10 backdrop-blur-sm border-border text-white placeholder:text-gray-400"
+                />
+                <Button variant="hero" size="lg" className="w-full sm:w-auto">
+                  Get Early Access
+                </Button>
+              </div>
 
-          <p className="text-sm text-gray-400 mt-6">
-            No spam, unsubscribe at any time.
-          </p>
+                             <p className="text-sm text-gray-400 mt-6">
+                 No spam, unsubscribe at any time.
+               </p>
+               
+               <p className="text-xs text-gray-400 mt-4 text-center">
+                 By signing up, you agree to our{" "}
+                 <Link 
+                   to="/terms" 
+                   className="text-blue-400 hover:text-blue-300 underline"
+                 >
+                   Terms & Conditions
+                 </Link>
+               </p>
+            </>
+          )}
+
+          {isAuthenticated && (
+            <div className="text-center">
+              <h2 className="text-2xl md:text-3xl font-bold text-white mb-4">
+                Welcome to Tuittor!
+              </h2>
+              <p className="text-lg text-gray-300 max-w-2xl mx-auto">
+                You're all set! Start exploring our AI-powered learning platform.
+              </p>
+            </div>
+          )}
         </div>
       </div>
 

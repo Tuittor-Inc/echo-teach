@@ -9,6 +9,8 @@ export interface GoogleUser {
   name: string;
   email: string;
   picture: string;
+  firstName?: string;
+  lastName?: string;
 }
 
 class GoogleAuthService {
@@ -41,6 +43,11 @@ class GoogleAuthService {
   }
 
   async signIn(): Promise<GoogleUser> {
+    // Check if client ID is configured
+    if (!this.clientId) {
+      throw new Error('Google Client ID not configured. Please add VITE_GOOGLE_CLIENT_ID to your .env file');
+    }
+
     if (!this.isInitialized) {
       await this.initialize();
     }
@@ -51,12 +58,17 @@ class GoogleAuthService {
         return;
       }
 
+      console.log('Initializing Google OAuth client with client ID:', this.clientId);
+
       const client = window.google.accounts.oauth2.initTokenClient({
         client_id: this.clientId,
         scope: 'openid email profile',
         callback: async (response: any) => {
+          console.log('Google OAuth callback received:', response);
+          
           if (response.error) {
-            reject(new Error(response.error));
+            console.error('Google OAuth error:', response.error);
+            reject(new Error(`Google OAuth error: ${response.error}`));
             return;
           }
 
@@ -65,11 +77,13 @@ class GoogleAuthService {
             const userInfo = await this.getUserInfo(response.access_token);
             resolve(userInfo);
           } catch (error) {
+            console.error('Error getting user info:', error);
             reject(error);
           }
         },
       });
 
+      console.log('Requesting access token...');
       client.requestAccessToken();
     });
   }
@@ -86,11 +100,19 @@ class GoogleAuthService {
     }
 
     const userData = await response.json();
+    
+    // Extract first and last name
+    const nameParts = userData.name.split(' ');
+    const firstName = nameParts[0];
+    const lastName = nameParts.slice(1).join(' ');
+
     return {
       id: userData.id,
       name: userData.name,
       email: userData.email,
       picture: userData.picture,
+      firstName,
+      lastName,
     };
   }
 
