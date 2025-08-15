@@ -2,8 +2,28 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Chrome } from "lucide-react";
 import heroBackground from "@/assets/hero2-bg.jpg";
+import { useState } from "react";
+import { googleAuth, GoogleUser } from "@/lib/google-auth";
+import { toast } from "sonner";
 
 const HeroSection = () => {
+  const [isLoading, setIsLoading] = useState(false);
+
+  const handleGoogleSignIn = async () => {
+    setIsLoading(true);
+    try {
+      const user = await googleAuth.signIn();
+      toast.success(`Welcome, ${user.name}!`);
+      console.log('Signed in user:', user);
+      // Here you can handle the signed-in user (e.g., save to state, redirect, etc.)
+    } catch (error) {
+      console.error('Google sign-in error:', error);
+      toast.error('Failed to sign in with Google. Please try again.');
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
   return (
     <section 
       className="min-h-screen flex flex-col relative overflow-hidden pt-8"
@@ -15,7 +35,7 @@ const HeroSection = () => {
     >
       {/* Logo */}
       <div className="absolute top-8 left-8 z-20">
-        <h2 className="text-2xl font-bold gradient-text">tuittor</h2>
+        <h2 className="text-2xl font-bold gradient-text">Tuittor</h2>
       </div>
       {/* Animated gradient overlay */}
       <div className="absolute inset-0 bg-gradient-hero opacity-30 animate-gradient animate-gradient-shift"></div>
@@ -40,9 +60,15 @@ const HeroSection = () => {
           </p>
 
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center max-w-md mx-auto mb-8">
-            <Button variant="google" size="lg" className="w-full sm:w-auto flex items-center gap-3">
+            <Button 
+              variant="google" 
+              size="lg" 
+              className="w-full sm:w-auto flex items-center gap-3"
+              onClick={handleGoogleSignIn}
+              disabled={isLoading}
+            >
               <Chrome className="w-5 h-5" />
-              Sign Up with Google
+              {isLoading ? 'Signing in...' : 'Sign Up with Google'}
             </Button>
           </div>
 
