@@ -29,8 +29,8 @@ const HeroSection = () => {
       </div>
 
       <div className="container mx-auto px-6 text-center relative z-10 flex-1 flex items-center justify-center">
-        <div className="max-w-4xl mx-auto animate-fade-in">
-          <h1 className="text-4xl md:text-6xl font-bold mb-6 leading-tight pt:12 sm:pt-0">
+        <div className="max-w-4xl mx-auto animate-fade-in  pt:12 sm:pt-0">
+          <h1 className="text-4xl md:text-6xl font-bold mb-6 leading-tight">
             <span className="gradient-text">Learn Smarter.</span>{" "}
             <span className="text-white">Live.</span>
           </h1>
