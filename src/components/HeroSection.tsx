@@ -8,7 +8,7 @@ const HeroSection = () => {
     <section 
       className="min-h-screen flex flex-col relative overflow-hidden pt-8"
       style={{
-        backgroundImage: `linear-gradient(135deg, rgba(0,0,0,0.7), rgba(0,0,0,0.5)), url(${heroBackground})`,
+        backgroundImage: `linear-gradient(135deg, rgba(0,0,0,0.84), rgba(0,0,0,0.6)), url(${heroBackground})`,
         backgroundSize: 'cover',
         backgroundPosition: 'center',
       }}
