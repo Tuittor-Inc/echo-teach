@@ -6,13 +6,17 @@ import heroBackground from "@/assets/hero-bg.jpg";
 const HeroSection = () => {
   return (
     <section 
-      className="min-h-screen flex items-center justify-center relative overflow-hidden"
+      className="min-h-screen flex flex-col relative overflow-hidden pt-8"
       style={{
         backgroundImage: `linear-gradient(135deg, rgba(0,0,0,0.7), rgba(0,0,0,0.5)), url(${heroBackground})`,
         backgroundSize: 'cover',
         backgroundPosition: 'center',
       }}
     >
+      {/* Logo */}
+      <div className="absolute top-8 left-8 z-20">
+        <h2 className="text-2xl font-bold gradient-text">tuittor</h2>
+      </div>
       {/* Animated gradient overlay */}
       <div className="absolute inset-0 bg-gradient-hero opacity-30 animate-gradient animate-gradient-shift"></div>
       
@@ -24,9 +28,9 @@ const HeroSection = () => {
         <div className="absolute top-1/2 right-1/4 w-1.5 h-1.5 bg-neon-orange rounded-full animate-pulse-slow" style={{ animationDelay: '1s' }}></div>
       </div>
 
-      <div className="container mx-auto px-6 text-center relative z-10">
+      <div className="container mx-auto px-6 text-center relative z-10 flex-1 flex items-center justify-center">
         <div className="max-w-4xl mx-auto animate-fade-in">
-          <h1 className="text-6xl md:text-8xl font-bold mb-6 leading-tight">
+          <h1 className="text-4xl md:text-6xl font-bold mb-6 leading-tight">
             <span className="gradient-text">Learn Smarter.</span>{" "}
             <span className="text-white">Live.</span>
           </h1>
