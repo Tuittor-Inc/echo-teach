@@ -1,7 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Chrome } from "lucide-react";
-import heroBackground from "@/assets/hero-bg.jpg";
+import heroBackground from "@/assets/colorful_wraps-wide.jpg";
 
 const HeroSection = () => {
   return (
