@@ -6,7 +6,7 @@ const PrivacyPolicy = () => {
   return (
     <div className="min-h-screen bg-gray-50">
       {/* Header */}
-      <div className="bg-white shadow-sm border-b">
+      <div className="bg-white backdrop-blur-sm shadow-sm sticky top-0 z-50">
         <div className="container mx-auto px-6 py-4">
           <div className="flex items-center gap-4">
             <Link to="/">
@@ -15,7 +15,9 @@ const PrivacyPolicy = () => {
                 Back to Home
               </Button>
             </Link>
-            <h1 className="text-2xl font-bold gradient-text">Tuittor</h1>
+            <Link to="/">
+              <h1 className="text-2xl font-bold gradient-text hover:opacity-80 transition-opacity cursor-pointer">Tuittor</h1>
+            </Link>
           </div>
         </div>
       </div>
@@ -122,10 +124,10 @@ const PrivacyPolicy = () => {
               <p className="text-gray-700 mb-4">
                 If you have any questions about this Privacy Policy, please contact us at:
               </p>
-              <p className="text-gray-700 mb-4">
-                Email: privacy@tuittor.com<br />
-                Address: [Your Business Address]
-              </p>
+                             <p className="text-gray-700 mb-4">
+                 Email: hello@tuittor.com<br />
+                 {/* Address: [Your Business Address] */}
+               </p>
             </section>
           </div>
         </div>

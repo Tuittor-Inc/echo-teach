@@ -58,14 +58,14 @@ const HeroSection = () => {
       </div>
 
       <div className="container mx-auto px-6 text-center relative z-10 flex-1 flex items-center justify-center">
-        <div className="max-w-4xl mx-auto animate-fade-in  pt:6 sm:pt-0">
+        <div className="max-w-4xl mx-auto animate-fade-in pt-4 sm:pt-0">
           <h1 className="text-4xl md:text-6xl font-bold mb-6 leading-tight">
             <span className="gradient-text">Learn Smarter.</span>{" "}
             <span className="text-white">Live.</span>
           </h1>
           
-          <p className="text-xl md:text-2xl text-gray-300 mb-12 max-w-2xl mx-auto leading-relaxed">
-            Experience real-time teaching that feels human — powered by AI.
+          <p className="text-xl md:text-xl text-gray-300 mb-12 max-w-2xl mx-auto leading-relaxed">
+            Experience real-time teaching that feels human — Powered by AI.
           </p>
 
           {!isAuthenticated && (
@@ -94,7 +94,7 @@ const HeroSection = () => {
                 </Button>
               </div>
 
-                             <p className="text-sm text-gray-400 mt-6">
+                             <p className="text-xs text-gray-400 mt-6">
                  No spam, unsubscribe at any time.
                </p>
                
@@ -124,7 +124,7 @@ const HeroSection = () => {
       </div>
 
       {/* Scroll indicator */}
-      <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
+      <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 animate-bounce">
         <div className="w-6 h-10 border-2 border-white/30 rounded-full flex justify-center">
           <div className="w-1 h-3 bg-white/50 rounded-full mt-2 animate-pulse"></div>
         </div>

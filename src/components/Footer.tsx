@@ -1,4 +1,5 @@
 import { Heart } from "lucide-react";
+import { Link } from "react-router-dom";
 
 const Footer = () => {
   return (
@@ -11,15 +12,15 @@ const Footer = () => {
           </div>
 
           <div className="flex flex-wrap justify-center md:justify-end gap-8 text-sm">
-            <a href="#about" className="text-gray-400 hover:text-primary transition-colors duration-300">
+            <Link to="/about" className="text-gray-400 hover:text-primary transition-colors duration-300">
               About
-            </a>
-            <a href="#privacy" className="text-gray-400 hover:text-primary transition-colors duration-300">
+            </Link>
+            <Link to="/privacy" className="text-gray-400 hover:text-primary transition-colors duration-300">
               Privacy Policy
-            </a>
-            <a href="#contact" className="text-gray-400 hover:text-primary transition-colors duration-300">
+            </Link>
+            <Link to="/contact" className="text-gray-400 hover:text-primary transition-colors duration-300">
               Contact
-            </a>
+            </Link>
           </div>
         </div>
 
