@@ -9,10 +9,13 @@ import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import { setUser, setLoading } from "@/redux/slices/userSlice";
 import UserProfile from "./UserProfile";
 import { Link } from "react-router-dom";
+import { earlyAccessAPI } from "@/lib/early-access-api";
 
 const HeroSection = () => {
   const dispatch = useAppDispatch();
   const { isAuthenticated, isLoading } = useAppSelector((state) => state.user);
+  const [email, setEmail] = useState("");
+  const [isSubmittingEarlyAccess, setIsSubmittingEarlyAccess] = useState(false);
 
   const handleGoogleSignIn = async () => {
     dispatch(setLoading(true));
@@ -27,6 +30,39 @@ const HeroSection = () => {
       toast.error(errorMessage);
     } finally {
       dispatch(setLoading(false));
+    }
+  };
+
+  const handleEarlyAccess = async () => {
+    if (!email.trim()) {
+      toast.error("Please enter your email address");
+      return;
+    }
+
+    setIsSubmittingEarlyAccess(true);
+    try {
+      // Check if user already signed up
+      const userExists = await earlyAccessAPI.hasUserSignedUp(email);
+      if (userExists) {
+        toast.error("You've already joined the waitlist with this email!");
+        return;
+      }
+
+      const response = await earlyAccessAPI.submitEarlyAccess({
+        email: email.trim(),
+        source: 'hero'
+      });
+      
+      toast.success(response.message);
+      setEmail("");
+      
+      if (response.waitlistPosition) {
+        toast.success(`You're #${response.waitlistPosition} on the waitlist!`);
+      }
+    } catch (error: any) {
+      toast.error(error.message);
+    } finally {
+      setIsSubmittingEarlyAccess(false);
     }
   };
 
@@ -87,10 +123,19 @@ const HeroSection = () => {
                 <Input 
                   type="email" 
                   placeholder="Enter your email" 
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
                   className="bg-background/10 backdrop-blur-sm border-border text-white placeholder:text-gray-400"
+                  onKeyPress={(e) => e.key === 'Enter' && handleEarlyAccess()}
                 />
-                <Button variant="hero" size="lg" className="w-full sm:w-auto">
-                  Get Early Access
+                <Button 
+                  variant="hero" 
+                  size="lg" 
+                  className="w-full sm:w-auto"
+                  onClick={handleEarlyAccess}
+                  disabled={isSubmittingEarlyAccess}
+                >
+                  {isSubmittingEarlyAccess ? 'Joining...' : 'Get Early Access'}
                 </Button>
               </div>
 
