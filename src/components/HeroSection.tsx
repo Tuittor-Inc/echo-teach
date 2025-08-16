@@ -2,6 +2,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Chrome } from "lucide-react";
 import heroBackground from "@/assets/hero2-bg.jpg";
+import logo from "@/assets/logo.png";
 import { useState } from "react";
 import { googleAuth } from "@/lib/google-auth";
 import { toast } from "sonner";
@@ -76,8 +77,9 @@ const HeroSection = () => {
       }}
     >
       {/* Logo */}
-      <div className="absolute top-8 left-8 z-20">
-        <h2 className="text-2xl font-bold gradient-text">Tuittor</h2>
+      <div className="absolute top-4 left-4 sm:top-8 sm:left-8 z-20">
+        <h2 className="hidden sm:block text-2xl font-bold gradient-text">Tuittor</h2>
+        <img src={logo} alt="Tuittor" className="w-10 h-10 sm:hidden" />
       </div>
       
       {/* User Profile - Top Right */}
@@ -94,13 +96,13 @@ const HeroSection = () => {
       </div>
 
       <div className="container mx-auto px-6 text-center relative z-10 flex-1 flex items-center justify-center">
-        <div className="max-w-4xl mx-auto animate-fade-in pt-4 sm:pt-0">
-          <h1 className="text-4xl md:text-6xl font-bold mb-6 leading-tight">
+        <div className="max-w-4xl mx-auto animate-fade-in pt-12 sm:pt-0">
+          <h1 className="text-2xl sm:text-4xl md:text-6xl font-bold mb-6 leading-tight">
             <span className="gradient-text">Learn Smarter.</span>{" "}
             <span className="text-white">Live.</span>
           </h1>
           
-          <p className="text-xl md:text-xl text-gray-300 mb-12 max-w-2xl mx-auto leading-relaxed">
+          <p className="text-base sm:text-lg md:text-xl text-gray-300 mb-12 max-w-2xl mx-auto leading-relaxed">
             Experience real-time teaching that feels human — Powered by AI.
           </p>
 
