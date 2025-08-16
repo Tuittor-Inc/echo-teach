@@ -36,7 +36,7 @@ const Unsubscribe = () => {
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-50">
       {/* Header */}
-      <div className="bg-white/80 backdrop-blur-sm shadow-sm border-b sticky top-0 z-50">
+      <div className="bg-white backdrop-blur-sm shadow-sm sticky top-0 z-50">
         <div className="container mx-auto px-6 py-4">
           <div className="flex items-center gap-4">
             <Link to="/">
