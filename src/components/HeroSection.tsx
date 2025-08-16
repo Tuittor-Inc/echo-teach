@@ -94,10 +94,6 @@ const HeroSection = () => {
                 </Button>
               </div>
 
-                             <p className="text-xs text-gray-400 mt-6">
-                 No spam, unsubscribe at any time.
-               </p>
-               
                <p className="text-xs text-gray-400 mt-4 text-center">
                  By signing up, you agree to our{" "}
                  <Link 

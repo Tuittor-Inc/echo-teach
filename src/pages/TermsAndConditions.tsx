@@ -4,9 +4,9 @@ import { Link } from "react-router-dom";
 
 const TermsAndConditions = () => {
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-50">
       {/* Header */}
-      <div className="bg-white shadow-sm border-b">
+      <div className="bg-white backdrop-blur-sm shadow-sm sticky top-0 z-50">
         <div className="container mx-auto px-6 py-4">
           <div className="flex items-center gap-4">
             <Link to="/">
@@ -15,7 +15,9 @@ const TermsAndConditions = () => {
                 Back to Home
               </Button>
             </Link>
-            <h1 className="text-2xl font-bold gradient-text">Tuittor</h1>
+            <Link to="/">
+              <h1 className="text-2xl font-bold gradient-text hover:opacity-80 transition-opacity cursor-pointer">Tuittor</h1>
+            </Link>
           </div>
         </div>
       </div>

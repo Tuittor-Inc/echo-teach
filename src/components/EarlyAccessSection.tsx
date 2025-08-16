@@ -1,6 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Chrome, Sparkles } from "lucide-react";
+import { Link } from "react-router-dom";
 
 const EarlyAccessSection = () => {
   return (
@@ -66,7 +67,14 @@ const EarlyAccessSection = () => {
           </div>
 
           <p className="text-sm text-gray-500 mt-8">
-            We respect your privacy. No spam, unsubscribe at any time.
+            We respect your privacy. No spam,{" "}
+            <Link
+              to="/unsubscribe"
+              className="text-blue-400 hover:text-blue-300 underline"
+            >
+              unsubscribe
+            </Link>{" "}
+            at any time.
           </p>
         </div>
       </div>
