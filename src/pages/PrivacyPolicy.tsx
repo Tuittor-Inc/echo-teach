@@ -84,7 +84,7 @@ const PrivacyPolicy = () => {
             <section className="mb-8">
               <h2 className="text-xl font-semibold mb-4 text-gray-900">7. Third-Party Services</h2>
               <p className="text-gray-700 mb-4">
-                Our Service integrates with Google OAuth for authentication. Please review Google's privacy policy to understand how they handle your information.
+                Our Service integrates with Google OAuth for authentication. Please review <a href="https://policies.google.com/privacy" className="text-blue-600 hover:text-blue-800 underline" target="_blank">Google's privacy policy</a> to understand how they handle your information.
               </p>
             </section>
 
